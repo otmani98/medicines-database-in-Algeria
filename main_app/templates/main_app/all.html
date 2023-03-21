@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}The List Of Medicines{% endblock title %}
+
+{% block content %}
+<section class="container">
+    <div class="order">
+        <h2>Order By:</h2>
+        <div class="forms">
+            <form action="{% url 'ordered' 'inn' %}" class="orderform">
+                {% csrf_token %}
+                <input type="hidden" name="order_by" value="inn">
+                <button>International Nonproprietary Name</button>
+            </form>
+            <form action="{% url 'ordered' 'bn' %}" class="orderform">
+                {% csrf_token %}
+                <input type="hidden" name="order_by" value="bn">
+                <button>Brand Name </button>
+            </form>
+            <form action="{% url 'ordered' 'form' %}" class="orderform">
+                {% csrf_token %}
+                <input type="hidden" name="order_by" value="form">
+                <button>Form</button>
+            </form>
+            <form action="{% url 'ordered' 'laboratories' %}" class="orderform">
+                {% csrf_token %}
+                <input type="hidden" name="order_by" value="laboratories">
+                <button>Laboratory</button>
+            </form>
+            <form action="{% url 'ordered' 'country' %}" class="orderform">
+                {% csrf_token %}
+                <input type="hidden" name="order_by" value="country">
+                <button>Country</button>
+            </form>
+        </div>
+    </div>
+    <div class="list">
+        <ul>
+            {% for result in page_obj %}
+            <li>
+                <p><span>BN:</span> {{result.bn}}</p>
+                <p><span>INN:</span> {{result.inn}}</p>
+                <p><span>FORM:</span> {{result.form}}</p>
+                <p><span>DOSING:</span> {{result.dosing}}</p>
+                <p><span>Lab:</span> {{result.laboratories}}</p>
+                <p><span>Country:</span> {{result.country}}</p>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+</section>
+{% endblock content %}

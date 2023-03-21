@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main_app/style.css' %}">
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    <header>
+        <h1><a class="index" href="{% url 'index' %}">Medicines database in Algeria</a></h1>
+        <nav>
+            <ul>
+                <li><a href="/">Search</a></li>
+                <li><a href="{% url 'all' %}">List Of Medicines</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% block content %}{% endblock content %}
+    <footer>
+        <div class="info">
+            <span>Last updated August 2022</span>
+            <a href="https://www.facebook.com/profile.php?id=100027618215547" target="_blank">By Otmani Ahmed</a>
+        </div>
+    </footer>
+</body>
+</html>

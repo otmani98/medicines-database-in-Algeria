@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Medicines database in Algeria{% endblock title %}
+
+{% block content %}
+    <section class="container">
+        <form action="{% url 'search'%}" method="POST" id="searchform">
+            {% csrf_token %}
+            <input type="search" name="search-input" id="search-input" required placeholder="Enter a Brand Name,International nonproprietary name,Country..." value="{{search_value}}">
+            <button on>Search</button>
+        </form>
+        <div class="list">
+            {% if after_search %}
+                {% if page_obj %}
+                <ul>
+                    {% for result in page_obj %}
+                    <li>
+                        <p><span>BN:</span> {{result.bn}}</p>
+                        <p><span>INN:</span> {{result.inn}}</p>
+                        <p><span>FORM:</span> {{result.form}}</p>
+                        <p><span>DOSING:</span> {{result.dosing}}</p>
+                        <p><span>Lab:</span> {{result.laboratories}}</p>
+                        <p><span>Country:</span> {{result.country}}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+                
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+                {% else %}
+                <p class="not-found">This Medicine Is Not Found in Our DataBase</p>
+                {% endif %}
+            {% endif %}
+            {% if empty_value %}
+            <p class="not-found">You Have to fill this field!!</p>
+            {% endif %}
+    </section>
+{% endblock content %}
