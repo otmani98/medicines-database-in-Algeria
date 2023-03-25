@@ -1,5 +1,5 @@
 # medicines-database-in-Algeria
-this project build in django, it's a database of medicens that exist in Algeria, you can search in many fields like a brand name or INN or manufacturing country..etc..
+this project builded in django, it's a database of medicens that exist in Algeria, you can search in many fields like a brand name or INN or manufacturing country..etc..
 
 
 ## Run this application:
