@@ -41,7 +41,7 @@ http://127.0.0.1:8000/
 [file.xlsx](https://www.miph.gov.dz/fr/wp-content/uploads/2022/12/NOMENCLATURE-NATIONALE-31-aout-2022.xlsx)
 
 
-## test in live:
+## Preview:
 
 [MedcinesDatabase In Algeria](https://satosan.pythonanywhere.com)
 
